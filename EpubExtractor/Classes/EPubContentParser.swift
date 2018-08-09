@@ -11,4 +11,5 @@ import UIKit
 protocol EPubContentParser {
     var contentURL: URL { get }
     var chapters: [ChapterItem] { get }
+    var directoryURL: URL { get }
 }
