@@ -12,10 +12,12 @@ import AEXML
 struct Epub2ContentParser: EPubContentParser {
     let contentURL: URL
     var chapters: [ChapterItem] = []
+    let directoryURL: URL
     
     init(manifest: [String:ManifestItem], epubContentsURL: URL) {
         let contentFilePath = manifest["ncx"]?.href ?? ""
         
+        self.directoryURL = URL(fileURLWithPath: epubContentsURL.path)
         self.contentURL = URL(fileURLWithPath: epubContentsURL.appendingPathComponent(contentFilePath).path)
         self.chapters = self.parseChapters(epubContentsURL: self.contentURL)
     }
