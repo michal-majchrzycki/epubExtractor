@@ -10,7 +10,8 @@ import UIKit
 import AEXML
 
 struct Epub2ChapterItem: ChapterItem {
-    let id: String
+    
+    var id: String?
     let playOrder: Int
     let src: URL
     let label: String?
