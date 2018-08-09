@@ -10,13 +10,17 @@ import UIKit
 import AEXML
 
 struct Epub3ChapterItem: ChapterItem {
+    
     let src: URL
     let label: String?
     let subChapters: [ChapterItem]
+    var id: String?
     
     init?(xmlElement: AEXMLElement, epubContentsURL: URL) {
         let aElement = xmlElement["a"]
-        
+        guard xmlElement.attributes["id"] != nil else {
+            return nil
+        }
         guard let srcString = aElement.attributes["href"] else {
                 return nil
         }
@@ -25,7 +29,6 @@ struct Epub3ChapterItem: ChapterItem {
         self.label = aElement.value
         
         var subChapters: [Epub3ChapterItem] = []
-        
         for subChapterElement in xmlElement["ol"]["li"].all ?? [] {
             if let subChapter = Epub3ChapterItem(xmlElement: subChapterElement, epubContentsURL: epubContentsURL) {
                 subChapters.append(subChapter)
