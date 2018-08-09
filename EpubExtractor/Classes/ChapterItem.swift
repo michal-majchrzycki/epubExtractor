@@ -13,4 +13,5 @@ public protocol ChapterItem {
     var src: URL { get }
     var label: String? { get }
     var subChapters: [ChapterItem] { get }
+    var id: String? { get }
 }
