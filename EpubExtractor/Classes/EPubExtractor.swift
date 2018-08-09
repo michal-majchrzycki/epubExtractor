@@ -26,6 +26,13 @@ public class EPubExtractor {
     public func extractEpub(epubURL: URL, destinationFolder: URL) {
         self.archiveExtractor.extract(archiveURL: epubURL, destinationFolder: destinationFolder)
     }
+    
+    public func parseEpub(epubURL: URL) {
+        do {
+            let epub = try self.epubParser.parseEpub(epubDirectoryURL: epubURL)
+            self.delegate?.epubExactorDidExtractEpub(epub)
+        } catch { }
+    }
 }
 
 extension EPubExtractor: ArchiveExtractorDelegate {
