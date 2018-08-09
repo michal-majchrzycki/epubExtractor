@@ -11,6 +11,7 @@ import AEXML
 
 struct Epub3ContentParser: EPubContentParser {
     let contentURL: URL
+    let directoryURL: URL
     var chapters: [ChapterItem] = []
     
     init(manifest: [String:ManifestItem], epubContentsURL: URL) {
@@ -25,6 +26,7 @@ struct Epub3ContentParser: EPubContentParser {
         }
         
         self.contentURL = URL(fileURLWithPath: epubContentsURL.appendingPathComponent(contentFilePath).path)
+        self.directoryURL = URL(fileURLWithPath: epubContentsURL.path)
         self.chapters = self.parseChapters(epubContentsURL: self.contentURL)
     }
     
